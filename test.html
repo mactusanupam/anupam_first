@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <title>Google Maps Multiple Markers</title>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCILMxKCNyFrNXoR6Zg3A7fYakGHzLliNY"
+          type="text/javascript"></script>
+</head>
+<body>
+  <div id="map"></div>
+
+  <script type="text/javascript">
+    var locations = [
+      ['Bondi Beach', 12.9716, 77.5946, 2],
+      ['Coogee Beach', 19.0760, 72.8777, 1]
+    ];
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 10,
+      center: new google.maps.LatLng(19.0760, 72.8777),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+
+    for (i = 0; i < locations.length; i++) {
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        map: map
+      });
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][0]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }
+  </script>
+</body>
+</html>
+<div id="div1" style="width:500px;">This is Level 1
+    <div id="div2">This is Level 2<p id="p1">This is Level 3</p>
+      <p id="p2">This is Level 3!
+        <span id="span1">This is Level 4</span>
+        <span id="span2">This is Level 4</span>
+      </p>
+    </div>
+  </div>
+
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("span").parentsUntil("#div1").css({"color": "blue", "border": "5px solid lightgreen"});
+    $("#div2").parent().css({"color": "red", "border":  "5px solid red"});
+    $("span").css({"color":"red"});
+});
+</script>
