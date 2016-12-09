@@ -1,0 +1,55 @@
+<html>
+<head>
+</head>
+<body>  
+
+<?php
+$name = $roll_no = $gender = $address = $marks= "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $name = test_input($_POST["name"]);
+  $roll_no = test_input($_POST["roll_no"]);
+  $marks = test_input($_POST["marks"]);
+  $address = test_input($_POST["address"]);
+  $gender = test_input($_POST["gender"]);
+}
+
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+?>
+
+
+<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
+  Name: <input type="text" name="name">
+  <br><br>
+  roll_no: <input type="text" name ="roll_no">
+  <br><br>
+  marks: <input type="text" name ="marks">
+  <br><br>
+  address: <textarea name="address" rows="5" cols="40"></textarea>
+  <br><br>
+  Gender:
+  <input type="radio" name="gender" value="female">Female
+  <input type="radio" name="gender" value="male">Male
+  <br><br>
+  <input type="submit" name="submit" value="Submit">  
+</form>
+
+<?php
+echo $name;
+echo "<br>";
+echo $roll_no;
+echo "<br>";
+echo $marks;
+echo "<br>";
+echo $address;
+echo "<br>";
+echo $gender;
+?>
+
+</body>
+</html>
